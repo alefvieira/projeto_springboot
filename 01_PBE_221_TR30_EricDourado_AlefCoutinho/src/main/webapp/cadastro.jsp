@@ -22,7 +22,7 @@
                         <li><a href="/cadastro">Cadastrar</a> </li>
                         <li>
                             <form action="/search" method="post" class="form_search">
-                                <input type="text" name="pesquisa" placeholder="Pesquisar..."/>
+                                <input type="text" name="id" placeholder="Pesquisar..."/>
                                 <input type="submit" value="Pesquisar"/>    
                             </form>
                         </li>
@@ -35,8 +35,6 @@
             <section class="container">
                 <div>
                     <h1>Cadastro de Produto</h1>
-                    <fieldset>
-                        <legend>Cadastro</legend>
                         <form action="/cadastro" method="post" class="estilo-form">
                             <ul>
                                 <li>
@@ -65,7 +63,6 @@
                             </ul>
                             <input class="btn-submit" type="submit" value="Cadastrar" />
                         </form>
-                    </fieldset>
 
                 </div>
             </section>

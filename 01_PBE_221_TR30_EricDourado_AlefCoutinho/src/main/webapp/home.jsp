@@ -4,6 +4,7 @@
     Author     : Aluno
 --%>
 
+<%@page import="br.com.produtos.produtos.models.ProdutosModel"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,7 +18,14 @@
     <body>
         <header>
             <div class="container">
-                <div><a href="/" class="logo"> <span class="span1">Projeto</span><span class="span2"> Avaliativo </span> <span class="span3"> do</span> <span class="span4">Rômulo</span> </a> </div>   
+                <div>
+                    <a href="/" class="logo"> 
+                        <span class="span1">Projeto</span>
+                        <span class="span2"> Avaliativo </span> 
+                        <span class="span3"> do</span> 
+                        <span class="span4">Rômulo</span> 
+                    </a> 
+                </div>   
 
 
                 <div>
@@ -26,7 +34,7 @@
                         <li><a href="/cadastro">Cadastrar</a> </li>
                         <li>
                             <form action="/search" method="post" class="form_search">
-                                <input type="text" name="pesquisa" placeholder="Pesquisar..."/>
+                                <input type="text" name="id" placeholder="Pesquisar..."/>
                                 <input type="submit" value="Pesquisar"/>    
                             </form>
                         </li>
@@ -49,7 +57,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${produtos}" var="produto">
+                        <c:forEach items="${produto}" var="produto">
+                            
                             <tr>
                                 <td>${produto.id}</td>
                                 <td>${produto.nomeProduto}</td>

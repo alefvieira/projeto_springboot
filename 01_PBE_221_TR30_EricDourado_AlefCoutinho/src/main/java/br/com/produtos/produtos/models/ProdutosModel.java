@@ -4,6 +4,7 @@
  */
 package br.com.produtos.produtos.models;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor @AllArgsConstructor
-public class ProdutosModel {  
+public class ProdutosModel implements Serializable {  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

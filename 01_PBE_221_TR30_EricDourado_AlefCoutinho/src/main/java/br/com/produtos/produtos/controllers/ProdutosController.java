@@ -1,18 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.produtos.produtos.controllers;
 
 import br.com.produtos.produtos.models.ProdRepository;
 import br.com.produtos.produtos.models.ProdutosModel;
 import java.util.List;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -27,6 +25,8 @@ public class ProdutosController {
     //usa injeção de dependência para criar um repositório de tarefas
     @Autowired
     ProdRepository repo;
+//    @Autowired
+//    ProdRepository2 repo2;
 
     /*
 recebe requisições do tipo GET nas urls "/" e "/index"
@@ -35,11 +35,13 @@ e envia para a página tarefas.jsp
      */
     @GetMapping({"/", "/index"})
     public String lista(Model model) {
+
+        /*busca no banco as tarefas ordenando por descrição*/
+        List produto = repo.findAll(Sort.by("nomeProduto"));
+        System.out.println(produto);
         
-            /*busca no banco as tarefas ordenando por descrição*/
-        List produtos = repo.findAll(Sort.by("nomeProduto"));
         /*adiciona a lista na resposta*/
-        model.addAttribute("produtos", produtos);
+        model.addAttribute("produto", produto);
         /*envia para a página tarefas.jsp*/
         return "home";
     }
@@ -87,38 +89,38 @@ depois retorna a listagem (ao chamar o método lista(model))
         model.addAttribute("produto", produto);
         return "produto";
     }
-    
+
     @GetMapping("/search")
-     public String consultarProduto() {
-         return "redirect:/";
-     }
+    public String consultarProduto() {
+        return "redirect:/";
+    }
 
     @PostMapping("/search")
-    public String consultarProduto(Model model, String pesquisa) {
+    public String consultarProduto(Model model, @RequestParam("id") String id) {
 
-        if(pesquisa.equals("")){
+        if (id.equals("")) {
             return "redirect:/";
         }
-        
-        boolean isNumeric =  pesquisa.matches("[+-]?\\d*(\\.\\d+)?");
-        if(isNumeric){
-            
-            Long i = Long.parseLong(pesquisa);
+        boolean isNumeric = id.matches("[+-]?\\d*(\\.\\d+)?");
+        if (isNumeric) {
+            Long i = Long.parseLong(id);
             ProdutosModel produto = repo.findById(i).get();
+
+//            ProdutosModel produto = repo.findById(i).get();;
             model.addAttribute("produto", produto);
-            
-            System.out.println(model);
             return "home_1";
-        }else{
-            return "redirect:/";
         }
+        teste(id);
+        return "redirect:/";
+    }
 
-//        isNumeric =  id.matches("[+-]?\\d*(\\.\\d+)?");;
-//        System.out.println(isNumeric);
-//
-//        isNumeric =  id.matches("[+-]?\\d*(\\.\\d+)?");
-//        System.out.println(isNumeric);
-
+    public void teste(String nome){
+        List produto = repo.findAll(Sort.by("nomeProduto"));
+        for(int i = 0; i < produto.size(); i++) {
+            System.out.println(produto);
+                
+            
+        }
     }
 
 }

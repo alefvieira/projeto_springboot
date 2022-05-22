@@ -24,7 +24,7 @@
                         <li><a href="/cadastro">Cadastrar</a> </li>
                         <li>
                             <form action="/search" method="post" class="form_search">
-                                <input type="text" name="pesquisa" placeholder="Pesquisar..."/>
+                                <input type="text" name="id" placeholder="Pesquisar..."/>
                                 <input type="submit" value="Pesquisar"/>    
                             </form>
                         </li>
